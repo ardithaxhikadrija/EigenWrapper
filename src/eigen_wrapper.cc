@@ -9,6 +9,7 @@
  * @copyright Copyright (c) 2021
  *
  */
+
 #include "EigenWrapper/eigen_wrapper.hh"
 
 #include <cmath>
@@ -171,4 +172,21 @@ Eigen::Matrix3d EigenWrapper::GetRotateMatrix(void) const {
 
 Eigen::Vector3d EigenWrapper::RotatePoint(const Eigen::Vector3d &point) {
   return this->GetRotateMatrix() * point;
+}
+
+Eigen::Vector3d EigenWrapper::AllTransformationPoint(
+    const Eigen::Vector3d &point) {
+  std::cout << "\n-----All Transformation Point Function-----" << std::endl;
+  std::cout << "Scaled point: " << (GetScaleMatrix() * point).transpose()
+            << std::endl;
+  std::cout << "Translated point: "
+            << (GetTranslateMatrix() * point).transpose() << std::endl;
+  std::cout << "Shear point: " << (GetShearMatrix() * point).transpose()
+            << std::endl;
+  std::cout << "Reflected point: " << (GetReflectMatrix() * point).transpose()
+            << std::endl;
+  std::cout << "Rotated point: " << (GetRotateMatrix() * point).transpose()
+            << std::endl;
+
+  return point;
 }

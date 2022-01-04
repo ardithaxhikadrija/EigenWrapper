@@ -91,7 +91,7 @@ class EigenWrapper {
   Eigen::Vector3d ShearPoint(const Eigen::Vector3d &point);
   Eigen::Vector3d ReflectPoint(const Eigen::Vector3d &point);
   Eigen::Vector3d RotatePoint(const Eigen::Vector3d &point);
-
+  Eigen::Vector3d AllTransformationPoint(const Eigen::Vector3d &pont);
  private:
   /**
    * @brief Set the Identity Matrix object

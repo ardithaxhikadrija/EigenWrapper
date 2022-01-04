@@ -31,10 +31,10 @@ int main() {
   }
 
   if (eigen_transform_.SetShearMatrix(35, 'Y')) {
-    std::cout
-        << "Shear point: "
-        << eigen_transform_.ShearPoint(Eigen::Vector3d(1, 1, 1)).transpose()
-        << std::endl;
+    std::cout << "Shear point: "
+              << eigen_transform_.ShearPoint(Eigen::Vector3d(1, 1, 1))
+                     .transpose()
+              << std::endl;
   }
 
   if (eigen_transform_.SetReflectMatrix('O')) {
@@ -50,6 +50,8 @@ int main() {
         << eigen_transform_.RotatePoint(Eigen::Vector3d(1, 1, 1)).transpose()
         << std::endl;
   }
+
+  eigen_transform_.AllTransformationPoint(Eigen::Vector3d(1, 1, 1));
 
   return 0;
 }
