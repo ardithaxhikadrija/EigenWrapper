@@ -51,7 +51,7 @@ int main() {
         << std::endl;
   }
 
-  eigen_transform_.AllTransformationPoint(Eigen::Vector3d(1, 1, 1));
+  eigen_transform_.AllTransformationPoint(Eigen::Vector3d(1, 2, 1));
 
   return 0;
 }

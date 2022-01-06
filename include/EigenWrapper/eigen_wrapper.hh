@@ -86,11 +86,20 @@ class EigenWrapper {
    * @param point The point the user want to add functions.
    * @return Eigen::Vector3d 3 Coordinates of the Point.
    */
-  Eigen::Vector3d ScaledPoint(const Eigen::Vector3d &point);
-  Eigen::Vector3d TranslatedPoint(const Eigen::Vector3d &point);
-  Eigen::Vector3d ShearPoint(const Eigen::Vector3d &point);
-  Eigen::Vector3d ReflectPoint(const Eigen::Vector3d &point);
-  Eigen::Vector3d RotatePoint(const Eigen::Vector3d &point);
+  Eigen::Vector3d Scale(const Eigen::Vector3d &point);
+  Eigen::Vector3d Translate(const Eigen::Vector3d &point);
+  Eigen::Vector3d Shear(const Eigen::Vector3d &point);
+  Eigen::Vector3d Reflect(const Eigen::Vector3d &point);
+  Eigen::Vector3d Rotate(const Eigen::Vector3d &point);
+
+  /**
+   * @brief This function is to be called and display all the transformations
+   * of the point. Inside, the function it contains the transformation formulas
+   * with the point the user gives.
+   * 
+   * @param pont 
+   * @return Eigen::Vector3d 
+   */
   Eigen::Vector3d AllTransformationPoint(const Eigen::Vector3d &pont);
  private:
   /**
@@ -163,19 +172,19 @@ class EigenWrapper {
   Eigen::Matrix3d translate_matrix_;
 
   /**
-   * @brief The Sheared Matrix
+   * @brief The Shear Matrix
    *
    */
   Eigen::Matrix3d shear_matrix_;
 
   /**
-   * @brief The Reflected Matrix
+   * @brief The Reflection Matrix
    *
    */
   Eigen::Matrix3d reflect_matrix_;
 
   /**
-   * @brief The Rotated Matrix
+   * @brief The Rotation Matrix
    *
    */
   Eigen::Matrix3d rotate_matrix_;

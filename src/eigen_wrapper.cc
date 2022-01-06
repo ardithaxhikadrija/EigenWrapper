@@ -15,10 +15,13 @@
 #include <cmath>
 #include <iostream>
 
-namespace degree {
-// TODO: DegreeToRadian
-double degreeToAngle(double angle_) { return angle_ * M_PI / 180; }
-}  // namespace degree
+namespace {
+constexpr int kHalfCircle = 180;
+constexpr int kNegative = -1;
+double DegreeToRadian(const double &angle) {
+  return angle * M_PI / kHalfCircle;
+}
+}  // namespace
 
 EigenWrapper::EigenWrapper(const Eigen::Matrix3d &identity) {
   if (!this->SetIdentityMatrix(identity)) {
@@ -47,6 +50,7 @@ Eigen::Matrix3d EigenWrapper::GetIdentityMatrix(void) const {
 
 bool EigenWrapper::SetScaleMatrix(const Eigen::Vector2d &scale) {
   if (this->GetIdentityMatrix() != Eigen::Matrix3d::Identity()) {
+    std::clog << "KASTRAVECIIIIIIIII";
     return false;
   } else {
     this->scale_matrix_ = this->GetIdentityMatrix();
@@ -89,7 +93,7 @@ bool EigenWrapper::SetShearMatrix(const double &angle, const char &direction) {
   if (this->GetIdentityMatrix() != Eigen::Matrix3d::Identity()) {
     return false;
   } else {
-    double tanAngle = tan(degree::degreeToAngle(angle));
+    double tanAngle = std::tan(DegreeToRadian(angle));
     if (direction == 'X') {
       this->shear_matrix_ = this->GetIdentityMatrix();
 
@@ -117,22 +121,20 @@ bool EigenWrapper::SetReflectMatrix(const char &direction) {
   if (this->GetIdentityMatrix() != Eigen::Matrix3d::Identity()) {
     return false;
   } else {
-    double x = -1;
-    if (direction == 'O') {
-      this->reflect_matrix_ = this->GetIdentityMatrix();
+    this->reflect_matrix_ = this->GetIdentityMatrix();
 
-      this->reflect_matrix_(0, 0) = x;
-      this->reflect_matrix_(1, 1) = x;
+    if (direction == 'O') {
+      this->reflect_matrix_(0, 0) = kNegative;
+      this->reflect_matrix_(1, 1) = kNegative;
+
       return true;
     } else if (direction == 'X') {
-      this->reflect_matrix_ = this->GetIdentityMatrix();
+      this->reflect_matrix_(1, 1) = kNegative;
 
-      this->reflect_matrix_(1, 1) = x;
       return true;
     } else if (direction == 'Y') {
-      this->reflect_matrix_ = this->GetIdentityMatrix();
+      this->reflect_matrix_(0, 0) = kNegative;
 
-      this->reflect_matrix_(0, 0) = x;
       return true;
     } else {
       std::cerr << __PRETTY_FUNCTION__ << ": No direction inputed" << std::endl;
@@ -177,16 +179,16 @@ Eigen::Vector3d EigenWrapper::RotatePoint(const Eigen::Vector3d &point) {
 Eigen::Vector3d EigenWrapper::AllTransformationPoint(
     const Eigen::Vector3d &point) {
   std::cout << "\n-----All Transformation Point Function-----" << std::endl;
-  std::cout << "Scaled point: " << (GetScaleMatrix() * point).transpose()
-            << std::endl;
-  std::cout << "Translated point: "
+  std::cout << __PRETTY_FUNCTION__ << " Scaled point -> "
+            << (GetScaleMatrix() * point).transpose() << std::endl;
+  std::cout << __PRETTY_FUNCTION__ << " Translated point -> "
             << (GetTranslateMatrix() * point).transpose() << std::endl;
-  std::cout << "Shear point: " << (GetShearMatrix() * point).transpose()
-            << std::endl;
-  std::cout << "Reflected point: " << (GetReflectMatrix() * point).transpose()
-            << std::endl;
-  std::cout << "Rotated point: " << (GetRotateMatrix() * point).transpose()
-            << std::endl;
+  std::cout << __PRETTY_FUNCTION__ << " Shear point -> "
+            << (GetShearMatrix() * point).transpose() << std::endl;
+  std::cout << __PRETTY_FUNCTION__ << " Reflected point -> "
+            << (GetReflectMatrix() * point).transpose() << std::endl;
+  std::cout << __PRETTY_FUNCTION__ << " Rotated point -> "
+            << (GetRotateMatrix() * point).transpose() << std::endl;
 
   return point;
 }
