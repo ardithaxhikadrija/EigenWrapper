@@ -3,6 +3,9 @@ project(EigenWrapper)
 
 find_package (Eigen3 3.3 REQUIRED NO_MODULE)
 
+# TODO Logger level
+# Debug
+
 # General
 ###############################################################################
 set(CMAKE_C_STANDARD 11)

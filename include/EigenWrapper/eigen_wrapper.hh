@@ -87,9 +87,37 @@ class EigenWrapper {
    * @return Eigen::Vector3d 3 Coordinates of the Point.
    */
   Eigen::Vector3d Scale(const Eigen::Vector3d &point);
+
+  /**
+   * @brief 
+   * 
+   * @param point 
+   * @return Eigen::Vector3d 
+   */
   Eigen::Vector3d Translate(const Eigen::Vector3d &point);
+
+  /**
+   * @brief 
+   * 
+   * @param point 
+   * @return Eigen::Vector3d 
+   */
   Eigen::Vector3d Shear(const Eigen::Vector3d &point);
+
+  /**
+   * @brief 
+   * 
+   * @param point 
+   * @return Eigen::Vector3d 
+   */
   Eigen::Vector3d Reflect(const Eigen::Vector3d &point);
+
+  /**
+   * @brief 
+   * 
+   * @param point 
+   * @return Eigen::Vector3d 
+   */
   Eigen::Vector3d Rotate(const Eigen::Vector3d &point);
 
   /**
@@ -97,10 +125,10 @@ class EigenWrapper {
    * of the point. Inside, the function it contains the transformation formulas
    * with the point the user gives.
    * 
-   * @param pont 
+   * @param point 
    * @return Eigen::Vector3d 
    */
-  Eigen::Vector3d AllTransformationPoint(const Eigen::Vector3d &pont);
+  Eigen::Vector3d AllTransformationPoint(const Eigen::Vector3d &point);
  private:
   /**
    * @brief Set the Identity Matrix object
@@ -188,6 +216,8 @@ class EigenWrapper {
    *
    */
   Eigen::Matrix3d rotate_matrix_;
+
+  // friend EigenWrapperTest;
 };
 
 #endif  // end EIGEN_WRAPPER_H
