@@ -13,6 +13,9 @@
 #define EIGEN_WRAPPER_H
 
 #include <Eigen/Dense>
+#include <spdlog/spdlog.h>
+#include "spdlog/fmt/ostr.h"
+
 
 /**
  * @brief Declaration of the EigenWrapper class.
