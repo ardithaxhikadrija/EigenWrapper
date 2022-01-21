@@ -2,6 +2,12 @@ cmake_minimum_required(VERSION 3.5)
 project(EigenWrapper)
 
 find_package (Eigen3 3.3 REQUIRED NO_MODULE)
+find_package (fmt)
+find_package (spdlog)
+# TODO Logger level
+# Debug
+
+
 
 # General
 ###############################################################################
@@ -36,5 +42,7 @@ add_executable( ${PROJECT_NAME}_exe
 # LINK LIBRARIES
 ###############################################################################
 target_link_libraries( ${PROJECT_NAME}_exe
-  ${PROJECT_NAME}_lib
+${PROJECT_NAME}_lib
+fmt::fmt
+spdlog::spdlog
 )

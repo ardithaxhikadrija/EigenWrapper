@@ -9,49 +9,54 @@
  * @copyright Copyright (c) 2021
  *
  */
+
+#include <fmt/color.h>
+
 #include <iostream>
 
 #include "EigenWrapper/eigen_wrapper.hh"
 
 int main() {
-  EigenWrapper eigen_transform_(Eigen::Matrix3d::Identity());
+  spdlog::info(": Welcome to EigenWrapper Project!\n");
+
+  // Only use this matrix in eigen_transform_ object to test the errors.
+  Eigen::Matrix3d m;
+  m << 1, 2, 3, 1, 2, 3, 1, 2, 3;
+
+  EigenWrapper eigen_transform_(
+      Eigen::Matrix3d::Identity());  // Comment this object if you want to test
+                                     // the errors.
+
+  // EigenWrapper eigen_transform_(m); // Use this object obly to test errors.
 
   if (eigen_transform_.SetScaleMatrix(Eigen::Vector2d(2, 2))) {
-    std::cout
-        << "Scaled point: "
-        << eigen_transform_.ScaledPoint(Eigen::Vector3d(1, 1, 1)).transpose()
-        << std::endl;
+    spdlog::info(": Scaled point: {}\n",
+                 eigen_transform_.Scale(Eigen::Vector3d(1, 1, 1)).transpose());
   }
 
   if (eigen_transform_.SetTranslateMatrix(Eigen::Vector2d(1, 3))) {
-    std::cout << "Translated point: "
-              << eigen_transform_.TranslatedPoint(Eigen::Vector3d(1, 1, 1))
-                     .transpose()
-              << std::endl;
+    spdlog::info(
+        ": Translated point: {}\n",
+        eigen_transform_.Translate(Eigen::Vector3d(1, 1, 1)).transpose());
   }
 
   if (eigen_transform_.SetShearMatrix(35, 'Y')) {
-    std::cout << "Shear point: "
-              << eigen_transform_.ShearPoint(Eigen::Vector3d(1, 1, 1))
-                     .transpose()
-              << std::endl;
+    spdlog::info(": Shear point: {}\n",
+                 eigen_transform_.Shear(Eigen::Vector3d(1, 1, 1)).transpose());
   }
 
   if (eigen_transform_.SetReflectMatrix('O')) {
-    std::cout
-        << "Reflected point: "
-        << eigen_transform_.ReflectPoint(Eigen::Vector3d(1, 1, 1)).transpose()
-        << std::endl;
+    spdlog::info(
+        ": Reflected point: {}\n",
+        eigen_transform_.Reflect(Eigen::Vector3d(1, 1, 1)).transpose());
   }
 
   if (eigen_transform_.SetRotateMatrix(60)) {
-    std::cout
-        << "Rotate point: "
-        << eigen_transform_.RotatePoint(Eigen::Vector3d(1, 1, 1)).transpose()
-        << std::endl;
+    spdlog::info(": Rotate point: {}\n",
+                 eigen_transform_.Rotate(Eigen::Vector3d(1, 1, 1)).transpose());
   }
 
-  eigen_transform_.AllTransformationPoint(Eigen::Vector3d(1, 1, 1));
+  // eigen_transform_.AllTransformationPoint(Eigen::Vector3d(1, 2, 1));
 
   return 0;
 }
